@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@import './media-queries.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  @include mobile {
+    background: #ef9a9a;
+  }
+  @include tablet {
+    background: #1c9554;
+  }
+  @include desktop {
+    background: #7006fb;
+  }
+}
+
+.flex-container {
+  @include mobile {
+    flex-direction: column;
+  }
+
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  /*text-align: center;*/
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.flex-item {
+  @include mobile {
+    flex: 100%;
+  }
+
+  @include tablet {
+    flex: 50%;
+  }
+
+  @include desktop {
+    flex: 20%;
+  }
+}
