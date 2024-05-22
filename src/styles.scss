@@ -1,7 +1,19 @@
 @import './media-queries.scss';
 
+// Fonts
+@font-face {
+  font-family: 'AvenirNext-Medium';
+  src: url('assets/fonts/avenir-next-demi.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirNext-Regular';
+  src: url('assets/fonts/avenir-next-regular.ttf') format('truetype');
+}
+
 * {
   box-sizing: border-box;
+  font-family: 'AvenirNext-Regular', Arial, Helvetica, sans-serif;
 }
 
 .container {
