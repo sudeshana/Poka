@@ -17,8 +17,31 @@ export const getPlantsEffect = createEffect(
       switchMap(({ url }) => {
         return plantService.getPlants(url).pipe(
           map((plantsResponse: GetPlantsResponseInterface) => {
-            persistanceService.set('PlantsCurrentData', plantsResponse);
-            return PlantAction.getPlantsSuccess({ plantsResponse });
+            //persistanceService.set('PlantsCurrentData', plantsResponse);
+            const currentState = persistanceService.get('PlantsCurrentData');
+            if (currentState !== null) {
+              /*console.log(currentState.previous);
+              console.log(currentState.next);
+              console.log(currentState.results);*/
+              /*const newState: GetPlantsResponseInterface = {
+                count: plantsResponse.count,
+                next: plantsResponse.next,
+                previous: plantsResponse.previous,
+                results: plantsResponse.results
+              }*/
+              plantsResponse.results = [
+                ...currentState.results,
+                ...plantsResponse.results,
+              ];
+              persistanceService.set('PlantsCurrentData', plantsResponse);
+              return PlantAction.getPlantsSuccess({ plantsResponse });
+            } else {
+              persistanceService.set('PlantsCurrentData', plantsResponse);
+              return PlantAction.getPlantsSuccess({ plantsResponse });
+            }
+
+            //persistanceService.set('PlantsCurrentData', newState);
+            //return PlantAction.getPlantsSuccess({ newState });
           }),
           catchError(() => {
             return of(PlantAction.getPlantsFailure());

@@ -1,0 +1,33 @@
+<ng-container *ngIf="data$ | async as data">
+  <div *ngIf="data.isLoading">Loading ....</div>
+  <div class="container">
+    <app-header [title]="title"></app-header>
+    <div
+      class="card-grid"
+      *ngIf="
+        data.plants?.results !== undefined && data.plants?.results?.length! > 0
+      ">
+      <ng-container *ngFor="let plant of data.plants?.results">
+        <app-card>
+          <div class="card-header">
+            <p class="card-title">{{ plant.name }}</p>
+          </div>
+          <p class="card-body">{{ plant.division }}</p>
+          <p class="card-body">{{ plant.address }}</p>
+          <p class="card-body">{{ plant.country }}</p>
+        </app-card>
+      </ng-container>
+    </div>
+    <app-button
+      *ngIf="data.plants?.next !== null"
+      text="Load More Results"
+      (click)="loadMore(data.plants?.next!)"></app-button>
+
+    <div
+      style="text-align: center"
+      *ngIf="data.plants?.next === null"
+      class="card-body">
+      End Of Results
+    </div>
+  </div>
+</ng-container>
