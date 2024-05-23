@@ -9,12 +9,14 @@
       ">
       <ng-container *ngFor="let plant of data.plants?.results">
         <app-card>
-          <div class="card-header">
-            <p class="card-title">{{ plant.name }}</p>
-          </div>
-          <p class="card-body">{{ plant.division }}</p>
-          <p class="card-body">{{ plant.address }}</p>
-          <p class="card-body">{{ plant.country }}</p>
+          <a [routerLink]="['/plants', plant.id]">
+            <div class="card-header">
+              <p class="card-title">{{ plant.name }}</p>
+            </div>
+            <p class="card-body">{{ plant.division }}</p>
+            <p class="card-body">{{ plant.address }}</p>
+            <p class="card-body">{{ plant.country }}</p>
+          </a>
         </app-card>
       </ng-container>
     </div>

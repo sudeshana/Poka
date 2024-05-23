@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { PlantAction } from '../../../../core/store/actions';
 import { PlantService } from '../../../../core/services/plant.service';
 import { CommonModule } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { PersistanceService } from '../../../../core/services/persistance.service';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { CardComponent } from '../../../../shared/components/card/card.component';
@@ -18,7 +18,13 @@ import {
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, CardComponent, ButtonComponent],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    CardComponent,
+    ButtonComponent,
+    RouterModule,
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
@@ -62,10 +68,5 @@ export class ListComponent implements OnInit {
     //this.url = '?offset=10';
     if (url === null) return;
     this.store.dispatch(PlantAction.getPlants({ url: url }));
-  }
-
-  addtwenty() {
-    this.url = '?offset=20';
-    this.store.dispatch(PlantAction.getPlants({ url: this.url }));
   }
 }

@@ -10,8 +10,4 @@ import { Router } from '@angular/router';
 })
 export class CardComponent {
   constructor(private readonly router: Router) {}
-
-  gotoDetails() {
-    this.router.navigate(['/details']);
-  }
 }
