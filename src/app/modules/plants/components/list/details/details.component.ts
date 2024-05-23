@@ -12,6 +12,7 @@ import {
   selectError,
   selectIsLoading,
 } from '../../../../../core/store/details-reducers';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-details',
@@ -21,6 +22,7 @@ import {
     CardComponent,
     ButtonComponent,
     BackButtonComponent,
+    CommonModule,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -36,7 +38,7 @@ export class DetailsComponent implements OnInit {
   data$ = combineLatest({
     isLoading: this.store.select(selectIsLoading),
     error: this.store.select(selectError),
-    plants: this.store.select(selectDetailsData),
+    details: this.store.select(selectDetailsData),
   });
 
   constructor(
