@@ -10,8 +10,9 @@ import { environment } from '../../../environments/environment.development';
 export class PlantService {
   constructor(private http: HttpClient) {}
 
-  getPlants(): Observable<GetPlantsResponseInterface> {
-    const url = environment.BaseUrl;
-    return this.http.get<GetPlantsResponseInterface>(url);
+  getPlants(url: string | undefined): Observable<GetPlantsResponseInterface> {
+    const fullUrl = url ? `${environment.BaseUrl}/${url}` : environment.BaseUrl;
+    //const fullUrl = environment.BaseUrl;
+    return this.http.get<GetPlantsResponseInterface>(fullUrl);
   }
 }
