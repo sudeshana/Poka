@@ -2,8 +2,14 @@ import { ApplicationConfig, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideRouterStore } from '@ngrx/router-store';
+
+import * as plantsEffects from './core/store/effects';
+import { provideEffects } from '@ngrx/effects';
+import { plantFeatureKey, plantReducer } from './core/store/reducers';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +23,9 @@ export const appConfig: ApplicationConfig = {
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
       connectInZone: true, // If set to true, the connection is established within the Angular zone
     }),
+    provideRouterStore(),
+    provideEffects(plantsEffects),
+    provideState(plantFeatureKey, plantReducer),
+    provideHttpClient(),
   ],
 };
