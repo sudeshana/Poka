@@ -56,8 +56,10 @@ describe('ListComponent', () => {
   });
 
   it('Renders Plants List', () => {
-    const posts = fixture.debugElement.queryAll(By.css('[data-testid="card"]'));
-    expect(posts.length).toEqual(1);
-    expect(posts[0].nativeElement.textContent).toContain('Aerospace');
+    const plants = fixture.debugElement.queryAll(
+      By.css('[data-testid="card"]')
+    );
+    expect(plants.length).toEqual(1);
+    expect(plants[0].nativeElement.textContent).toContain('Aerospace');
   });
 });
