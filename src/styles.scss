@@ -142,9 +142,16 @@ body ::before {
 }
 
 .details-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  gap: 1.5rem;
-  align-items: stretch; /* Add this line to make items match the height */
+  display: grid;
+
+  @include mobile {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @include tablet {
+    grid-template-columns: 1fr 2fr;
+  }
+  @include desktop {
+    grid-template-columns: 1fr 2fr;
+  }
+  gap: 1rem;
 }
