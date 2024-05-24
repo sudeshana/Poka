@@ -24,3 +24,22 @@ $screen-tablet-max: 1024px;
     @content;
   }
 }
+
+// Fonts
+@font-face {
+  font-family: 'AvenirNext-Medium';
+  src: url('assets/fonts/avenir-next-demi.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirNext-Regular';
+  src: url('assets/fonts/avenir-next-regular.ttf') format('truetype');
+}
+
+// Brand colors
+
+$primary-button-color: #406de4;
+$dark-Header: #323a47;
+$dark-Background: #4e5b6f;
+$light-background: #f3f4f6;
+$green-text-color: #0f9f8a;
