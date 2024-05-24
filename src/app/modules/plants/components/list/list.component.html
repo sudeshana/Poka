@@ -8,7 +8,7 @@
         data.plants?.results !== undefined && data.plants?.results?.length! > 0
       ">
       <ng-container *ngFor="let plant of data.plants?.results">
-        <app-card>
+        <app-card data-testid="card">
           <a [routerLink]="['/plants', plant.id]">
             <div class="card-header">
               <p class="card-title">{{ plant.name }}</p>
