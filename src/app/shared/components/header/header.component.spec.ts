@@ -20,21 +20,21 @@ describe('HeaderComponent', () => {
   });
 
   it('Renders default state', () => {
-    const HeaderComponent = fixture.debugElement.query(
+    const headerComponent = fixture.debugElement.query(
       By.css('[data-testid="title"]')
     );
 
-    expect(HeaderComponent.nativeElement.textContent).toEqual(' header ');
+    expect(headerComponent.nativeElement.textContent).toEqual(' header ');
   });
 
   it('Renders custom state', () => {
     component.description = 'Testing custom description';
     fixture.detectChanges();
 
-    const HeaderComponent = fixture.debugElement.query(
+    const headerComponent = fixture.debugElement.query(
       By.css('[data-testid="description"]')
     );
-    expect(HeaderComponent.nativeElement.textContent).toEqual(
+    expect(headerComponent.nativeElement.textContent).toEqual(
       ' Testing custom description '
     );
   });
