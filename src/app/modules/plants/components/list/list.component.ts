@@ -14,6 +14,7 @@ import {
   selectPlantsData,
 } from '../../../../core/store/reducers';
 import { Title } from '@angular/platform-browser';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-list',
@@ -46,7 +47,9 @@ export class ListComponent implements OnInit, AfterViewInit {
   ) {
     this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
-        this.persistanceService.delete('PlantsCurrentData');
+        this.persistanceService.delete(
+          environment.PlantsCurrentData_LocalStorage_Key
+        );
       }
     });
   }

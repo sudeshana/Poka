@@ -5,6 +5,7 @@ import { PlantAction } from './actions';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { GetPlantsResponseInterface } from '../../shared/types/GetPlantsResponse.interface';
 import { PersistanceService } from '../services/persistance.service';
+import { environment } from '../../../environments/environment.development';
 
 export const getPlantsEffect = createEffect(
   (
@@ -17,14 +18,19 @@ export const getPlantsEffect = createEffect(
       switchMap(({ url }) => {
         return plantService.getPlants(url).pipe(
           map((plantsResponse: GetPlantsResponseInterface) => {
-            const currentState = persistanceService.get('PlantsCurrentData');
+            const currentState = persistanceService.get(
+              environment.PlantsCurrentData_LocalStorage_Key
+            );
             if (currentState !== null) {
               plantsResponse.results = [
                 ...currentState.results,
                 ...plantsResponse.results,
               ];
             }
-            persistanceService.set('PlantsCurrentData', plantsResponse);
+            persistanceService.set(
+              environment.PlantsCurrentData_LocalStorage_Key,
+              plantsResponse
+            );
             return PlantAction.getPlantsSuccess({ plantsResponse });
           }),
           catchError(() => {
