@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../../../../shared/components/button/button.component';
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { HeaderComponent } from '../../../../../shared/components/header/header.component';
@@ -6,13 +6,14 @@ import { BackButtonComponent } from '../../../../../shared/components/back-butto
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { DetailsAction } from '../../../../../core/store/details-actions';
-import { combineLatest } from 'rxjs';
+import { combineLatest, first } from 'rxjs';
 import {
   selectDetailsData,
   selectError,
   selectIsLoading,
 } from '../../../../../core/store/details-reducers';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details',
@@ -27,7 +28,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, AfterViewInit {
   @Input() title: string = 'Details';
   @Input() description: string = 'Description';
 
@@ -41,13 +42,24 @@ export class DetailsComponent implements OnInit {
     details: this.store.select(selectDetailsData),
   });
 
+  title$ = this.store
+    .select(selectDetailsData)
+    .pipe(first(value => value !== null));
+
   constructor(
     private store: Store,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.id = isNaN(this.id) ? 1 : this.id;
     this.store.dispatch(DetailsAction.getDetails({ id: this.id }));
+  }
+
+  ngAfterViewInit(): void {
+    this.title$.subscribe(value => {
+      this.titleService.setTitle(`Poka | ${value?.name}`);
+    });
   }
 }
