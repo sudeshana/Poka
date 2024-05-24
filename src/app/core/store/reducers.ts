@@ -7,7 +7,6 @@ const initialState: PlantsStateInterface = {
   isLoading: false,
   error: null,
   data: null,
-  isNavigated: false,
 };
 
 const plantsFeature = createFeature({
@@ -19,7 +18,6 @@ const plantsFeature = createFeature({
       (state): PlantsStateInterface => ({
         ...state,
         isLoading: true,
-        isNavigated: false,
       })
     ),
     on(
@@ -28,7 +26,6 @@ const plantsFeature = createFeature({
         ...state,
         isLoading: false,
         data: action.plantsResponse,
-        isNavigated: false,
       })
     ),
     on(
@@ -36,13 +33,9 @@ const plantsFeature = createFeature({
       (state): PlantsStateInterface => ({
         ...state,
         isLoading: false,
-        isNavigated: false,
       })
     ),
-    on(
-      routerNavigationAction,
-      (): PlantsStateInterface => ({ ...initialState, isNavigated: true })
-    )
+    on(routerNavigationAction, (): PlantsStateInterface => initialState)
   ),
 });
 

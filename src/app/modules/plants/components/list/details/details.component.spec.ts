@@ -17,7 +17,6 @@ describe('DetailsComponent', () => {
       isLoading: false,
       error: null,
       data: null,
-      isNavigated: true,
     },
     details: {
       isLoading: false,
