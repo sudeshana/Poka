@@ -12,7 +12,6 @@ export class PlantService {
 
   getPlants(url: string | undefined): Observable<GetPlantsResponseInterface> {
     const fullUrl = url ? `${environment.BaseUrl}/${url}` : environment.BaseUrl;
-    //const fullUrl = environment.BaseUrl;
     return this.http.get<GetPlantsResponseInterface>(fullUrl);
   }
 }
